@@ -82,3 +82,5 @@ Known Bugs and Problems
  * With Snow Leopard MacOS X 10.6 the 'osascript' helper, which is used for XCode integration, might throw some
    errors. Just ignore it until it is solved by Adobe or Apple, it does not affect xobjs. 
    Here is a related discussion on the problem http://forums.adobe.com/message/2225116
+ * The script is now tab indented
+ * code in dealloc might be replaced, add a trailing // to any line you want to preserve
