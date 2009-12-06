@@ -8,6 +8,7 @@ your objects. And you can define the attributes according to the
 [Google Objective-C Styleguide](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml#Variable_Name) 
 using a trailing underscore, i.e. your public attribute is then defined 
 without this underscore.
+ADDED: leading underscore also supported.
 
 Preparations
 ------------
@@ -35,8 +36,8 @@ In your header file mark you properties like this
 	    XIBOUTLET UITextView *message_;    
 	    XASSIGN id delegate_;    
 	    XASSIGN int counter;    
-	    XRETAIN NSArray *listOfUsers_;    
-	    XCOPY NSString *secretKey_;
+	    XRETAIN NSArray *_listOfUsers;    
+	    XCOPY NSString *_secretKey;
 	    int age;
 	}
 

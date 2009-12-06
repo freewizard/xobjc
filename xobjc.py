@@ -139,6 +139,8 @@ rxsyn =  re.compile("""
     \;    
 """, re.VERBOSE|re.M|re.DOTALL)
 
+rxleadingunderscore = re.compile("(\s*\*?\s*)_(.+)")
+
 class Module:
     
     def __init__(filename):
@@ -189,9 +191,12 @@ def analyze(hdata, mdata):
         for vname in sorted(vars.keys()):
             # print vname
             mode, type_ = vars[vname]
+            vnamem = rxleadingunderscore.match(vname)
             if 1: #mode != 'iboutlet':   
                 if vname.endswith('_'):
                     vname = vname[:-1]
+                elif vnamem:
+                    vname = vnamem.group(1) + vnamem.group(2)
                 if mode == 'iboutlet':
                     mode = 'retain'
                 elif mode == 'xiboutlet':
@@ -225,6 +230,9 @@ def analyze(hdata, mdata):
             if 1: # mode != 'iboutlet':  
                 if vname.endswith('_'):
                     pvname = vname[:-1]
+                    block.append("@synthesize %s = %s;" % (pvname, vname))
+                elif vname.startswith('_'):
+                    pvname = vname[1:]
                     block.append("@synthesize %s = %s;" % (pvname, vname))
                 else:
                     block.append("@synthesize %s;" % (vname))
